@@ -12,3 +12,4 @@ C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Con
 C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\Memory_Games_Console.pdb
 C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\Memory_Games_Console.genruntimeconfig.cache
 C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\ref\Memory_Games_Console.dll
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\Memory_Games_Console.sourcelink.json

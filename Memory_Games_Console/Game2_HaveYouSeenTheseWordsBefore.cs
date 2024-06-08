@@ -9,8 +9,8 @@ namespace Memory_Games_Console
 {
     internal class Game2_HaveYouSeenTheseWordsBefore : BaseClassForAllGames
     {
-        public override string[] ListOfWordsToBeShownToPlayer { get; set; } = new string[10];
-        public override string[] GameSolution { get; set; } = new string[30];
+        public override string[] ListOfWordsToBeShownToPlayer { get; set; } = new string[30];
+        public override string[] GameSolution { get; set; } = new string[10];
         public override string[] PlayersAnswers { get; set; } = new string[10];
         public override int PlayerScore { get; set; } = 0;
         public override double PlayerTime { get; set; } = 0;
@@ -29,16 +29,6 @@ namespace Memory_Games_Console
             PlayerScore = 0;
             PlayerTime = 0;
             int index = GenerateNewIndex();
-            for (int i = 0; i < GameSolution.Length; i++)
-            {
-                while (GameSolution.Contains(allWords[index]))
-                {
-                    index = GenerateNewIndex();
-                }
-                GameSolution[i] = allWords[index];
-            }
-
-            index = GenerateNewIndex();
             for (int i = 0; i < ListOfWordsToBeShownToPlayer.Length; i++)
             {
                 while (ListOfWordsToBeShownToPlayer.Contains(allWords[index]))
@@ -47,17 +37,27 @@ namespace Memory_Games_Console
                 }
                 ListOfWordsToBeShownToPlayer[i] = allWords[index];
             }
+
+            index = GenerateNewIndex();
+            for (int i = 0; i < GameSolution.Length; i++)
+            {
+                while (GameSolution.Contains(allWords[index]))
+                {
+                    index = GenerateNewIndex();
+                }
+                GameSolution[i] = allWords[index];
+            }
         }
 
         public override void DisplayGame()
         {
             Console.Clear();
             Console.WriteLine("Game 2: 30 words will be shown in the console. You have 30 seconds to remember them.");
-            Console.WriteLine("Next, 10 words will be shown in the console and you will have to decide whether they were in the original list.");
+            Console.WriteLine("After that, 10 words will be shown in the console and you will have to decide whether they were in the original list.");
             Console.WriteLine("Press Enter to start.");
             Console.ReadLine();
             Console.Clear();
-            Console.WriteLine(string.Join(", ", GameSolution));
+            Console.WriteLine(string.Join(", ", ListOfWordsToBeShownToPlayer));
             Thread.Sleep(30000);
             Console.Clear();
         }
@@ -66,29 +66,36 @@ namespace Memory_Games_Console
         {
             Console.WriteLine("Have you seen these words in the list? Type in Y or y for yes and N or n for no.");
             DateTime startTime = DateTime.Now;
-            for (int i = 0; i < ListOfWordsToBeShownToPlayer.Length; i++)
+            for (int i = 0; i < GameSolution.Length; i++)
             {
-                Console.WriteLine($"{ListOfWordsToBeShownToPlayer[i]}: ");
+                Console.WriteLine($"{GameSolution[i]}: ");
                 string playersGuess = Console.ReadLine().ToUpper();
                 while (playersGuess != "Y" && playersGuess != "N")
                 {
                     Console.WriteLine("Try again, type in Y or y for yes and N or n for no.");
                     playersGuess = Console.ReadLine().ToUpper();
                 }
-                if ((GameSolution.Contains(ListOfWordsToBeShownToPlayer[i]) && playersGuess == "Y") || (!GameSolution.Contains(ListOfWordsToBeShownToPlayer[i]) && playersGuess == "N"))
+                PlayersAnswers[i] = playersGuess;
+                if (ListOfWordsToBeShownToPlayer.Contains(GameSolution[i]))
                 {
-                    PlayersAnswers[i] = "correct";
+                    GameSolution[i] = "Y";
                 }
                 else
                 {
-                    PlayersAnswers[i] = "incorrect";
+                    GameSolution[i] = "N";
                 }
             }
             PlayerTime = (DateTime.Now - startTime).TotalSeconds;
         }
         public override void CheckTheResults()
         {
-            PlayerScore = PlayersAnswers.Where(w => w.Equals("correct")).Count();
+            for (int i = 0; i < PlayersAnswers.Length; i++)
+            {
+                if (PlayersAnswers[i] == GameSolution[i])
+                {
+                    PlayerScore++;
+                }
+            }
         }
         public override void ShowTheResults()
         {

@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Kika\\Documents\\C# 2\\Final_Project_Memory_Games_Console\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C5893471-B8B9-49D4-A3A7-0943D325B83A}|Memory_Games_Console\\Memory_Games_Console.csproj|c:\\users\\kika\\documents\\c# 2\\final_project_memory_games_console\\memory_games_console\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5893471-B8B9-49D4-A3A7-0943D325B83A}|Memory_Games_Console\\Memory_Games_Console.csproj|solutionrelative:memory_games_console\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C5893471-B8B9-49D4-A3A7-0943D325B83A}|Memory_Games_Console\\Memory_Games_Console.csproj|c:\\users\\kika\\documents\\c# 2\\final_project_memory_games_console\\memory_games_console\\game2_haveyouseenthesewordsbefore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C5893471-B8B9-49D4-A3A7-0943D325B83A}|Memory_Games_Console\\Memory_Games_Console.csproj|solutionrelative:memory_games_console\\game2_haveyouseenthesewordsbefore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C5893471-B8B9-49D4-A3A7-0943D325B83A}|Memory_Games_Console\\Memory_Games_Console.csproj|c:\\users\\kika\\documents\\c# 2\\final_project_memory_games_console\\memory_games_console\\game1_wordsincorrectorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C5893471-B8B9-49D4-A3A7-0943D325B83A}|Memory_Games_Console\\Memory_Games_Console.csproj|solutionrelative:memory_games_console\\game1_wordsincorrectorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C5893471-B8B9-49D4-A3A7-0943D325B83A}|Memory_Games_Console\\Memory_Games_Console.csproj|c:\\users\\kika\\documents\\c# 2\\final_project_memory_games_console\\memory_games_console\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C5893471-B8B9-49D4-A3A7-0943D325B83A}|Memory_Games_Console\\Memory_Games_Console.csproj|solutionrelative:memory_games_console\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,7 +42,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Game3_WhichNumberWasShownOnlyOnce.cs",
               "DocumentMoniker": "C:\\Users\\Kika\\Documents\\C# 2\\Final_Project_Memory_Games_Console\\Memory_Games_Console\\Game3_WhichNumberWasShownOnlyOnce.cs",
               "RelativeDocumentMoniker": "Memory_Games_Console\\Game3_WhichNumberWasShownOnlyOnce.cs",
@@ -50,25 +50,24 @@
               "RelativeToolTip": "Memory_Games_Console\\Game3_WhichNumberWasShownOnlyOnce.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACwAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-05T16:56:42.756Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-05T16:56:42.756Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Game2_HaveYouSeenTheseWordsBefore.cs",
               "DocumentMoniker": "C:\\Users\\Kika\\Documents\\C# 2\\Final_Project_Memory_Games_Console\\Memory_Games_Console\\Game2_HaveYouSeenTheseWordsBefore.cs",
               "RelativeDocumentMoniker": "Memory_Games_Console\\Game2_HaveYouSeenTheseWordsBefore.cs",
               "ToolTip": "C:\\Users\\Kika\\Documents\\C# 2\\Final_Project_Memory_Games_Console\\Memory_Games_Console\\Game2_HaveYouSeenTheseWordsBefore.cs",
               "RelativeToolTip": "Memory_Games_Console\\Game2_HaveYouSeenTheseWordsBefore.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFoAAABRAAAA",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAYwGEAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-05T16:12:38.287Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Game1_WordsInCorrectOrder.cs",
               "DocumentMoniker": "C:\\Users\\Kika\\Documents\\C# 2\\Final_Project_Memory_Games_Console\\Memory_Games_Console\\Game1_WordsInCorrectOrder.cs",
               "RelativeDocumentMoniker": "Memory_Games_Console\\Game1_WordsInCorrectOrder.cs",
@@ -76,12 +75,11 @@
               "RelativeToolTip": "Memory_Games_Console\\Game1_WordsInCorrectOrder.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAADoAAABhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-04T14:57:31.068Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-04T14:57:31.068Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "BaseClassForAllGames.cs",
               "DocumentMoniker": "C:\\Users\\Kika\\Documents\\C# 2\\Final_Project_Memory_Games_Console\\Memory_Games_Console\\BaseClassForAllGames.cs",
               "RelativeDocumentMoniker": "Memory_Games_Console\\BaseClassForAllGames.cs",
@@ -89,18 +87,17 @@
               "RelativeToolTip": "Memory_Games_Console\\BaseClassForAllGames.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-03T18:28:10.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-03T18:28:10.227Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Kika\\Documents\\C# 2\\Final_Project_Memory_Games_Console\\Memory_Games_Console\\Program.cs",
               "RelativeDocumentMoniker": "Memory_Games_Console\\Program.cs",
               "ToolTip": "C:\\Users\\Kika\\Documents\\C# 2\\Final_Project_Memory_Games_Console\\Memory_Games_Console\\Program.cs",
               "RelativeToolTip": "Memory_Games_Console\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAOAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAOAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-03T18:22:50.56Z",
               "EditorCaption": ""
