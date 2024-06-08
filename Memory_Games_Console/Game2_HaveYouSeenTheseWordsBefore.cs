@@ -69,13 +69,14 @@ namespace Memory_Games_Console
             for (int i = 0; i < GameSolution.Length; i++)
             {
                 Console.WriteLine($"{GameSolution[i]}: ");
-                string playersGuess = Console.ReadLine().ToUpper();
-                while (playersGuess != "Y" && playersGuess != "N")
+                char playersGuess = char.ToUpper(Console.ReadKey().KeyChar);
+                while (playersGuess != 'Y' && playersGuess != 'N')
                 {
+                    Console.WriteLine();
                     Console.WriteLine("Try again, type in Y or y for yes and N or n for no.");
-                    playersGuess = Console.ReadLine().ToUpper();
+                    playersGuess = char.ToUpper(Console.ReadKey().KeyChar);
                 }
-                PlayersAnswers[i] = playersGuess;
+                PlayersAnswers[i] = playersGuess.ToString();
                 if (ListOfWordsToBeShownToPlayer.Contains(GameSolution[i]))
                 {
                     GameSolution[i] = "Y";
@@ -84,6 +85,7 @@ namespace Memory_Games_Console
                 {
                     GameSolution[i] = "N";
                 }
+                Console.WriteLine();
             }
             PlayerTime = (DateTime.Now - startTime).TotalSeconds;
         }
@@ -100,6 +102,7 @@ namespace Memory_Games_Console
         public override void ShowTheResults()
         {
             Console.WriteLine($"Correct answers: {PlayerScore}, time: {(int)(PlayerTime / 60)} min {Math.Round(PlayerTime % 60, 2)} s");
+            Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
         }
     }

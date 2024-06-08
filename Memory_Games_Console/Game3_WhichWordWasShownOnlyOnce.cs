@@ -97,6 +97,7 @@ namespace Memory_Games_Console
             {
                 Console.WriteLine($"Incorrect, the right answer was {GameSolution[0]}.");
             }
+            Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
         }
     }

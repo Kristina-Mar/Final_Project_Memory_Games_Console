@@ -78,6 +78,7 @@ namespace Memory_Games_Console
         public override void ShowTheResults()
         {
             Console.WriteLine($"Correct answers: {PlayerScore}, time: {(int)(PlayerTime / 60)} min {Math.Round(PlayerTime % 60, 2)} s");
+            Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
         }
     }
