@@ -1,0 +1,14 @@
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\bin\Debug\net8.0\Memory_Games_Console.exe
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\bin\Debug\net8.0\Memory_Games_Console.deps.json
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\bin\Debug\net8.0\Memory_Games_Console.runtimeconfig.json
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\bin\Debug\net8.0\Memory_Games_Console.dll
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\bin\Debug\net8.0\Memory_Games_Console.pdb
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\Memory_Games_Console.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\Memory_Games_Console.AssemblyInfoInputs.cache
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\Memory_Games_Console.AssemblyInfo.cs
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\Memory_Games_Console.csproj.CoreCompileInputs.cache
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\Memory_Games_Console.dll
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\refint\Memory_Games_Console.dll
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\Memory_Games_Console.pdb
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\Memory_Games_Console.genruntimeconfig.cache
+C:\Users\Kika\Documents\C# 2\Final_Project_Memory_Games_Console\Memory_Games_Console\obj\Debug\net8.0\ref\Memory_Games_Console.dll
