@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Memory_Games_Console
 {
-    internal class Game3_WhichNumberWasShownOnlyOnce : BaseClassForAllGames
+    internal class Game3_WhichWordWasShownOnlyOnce : BaseClassForAllGames
     {
         public override string[] ListOfWordsToBeShownToPlayer { get; set; } = new string[31];
         public override string[] GameSolution { get; set; } = new string[1];
@@ -59,7 +59,7 @@ namespace Memory_Games_Console
         {
             Console.Clear();
             Console.WriteLine("Game 3: 31 words will be shown in the console one by one. One of them will only be shown once.");
-            Console.WriteLine("Your task will be to correctly identify the one lone card.");
+            Console.WriteLine("Your task will be to correctly identify the one lone word.");
             Console.WriteLine("Press Enter to start.");
             Console.ReadLine();
             for (int i = 0; i < ListOfWordsToBeShownToPlayer.Count(); i++)
