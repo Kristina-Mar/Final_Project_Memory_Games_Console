@@ -9,6 +9,7 @@ namespace Memory_Games_Console
 {
     internal class Game2_HaveYouSeenTheseWordsBefore : BaseClassForAllGames
     {
+        public override string GameName { get; set; } = "Game 2";
         public override string[] ListOfWordsToBeShownToPlayer { get; set; } = new string[30];
         public override string[] GameSolution { get; set; } = new string[10];
         public override string[] PlayersAnswers { get; set; } = new string[10];
@@ -21,31 +22,34 @@ namespace Memory_Games_Console
             DisplayGame();
             LogPlayersAnswers();
             CheckTheResults();
+            PlayerScores.CheckTheScoreAgainstBestScores(GameName, PlayerScore, PlayerTime);
             ShowTheResults();
+            Console.WriteLine("Press any key to return to the main menu.");
+            Console.ReadLine();
         }
 
         public override void SetUpGame()
         {
             PlayerScore = 0;
             PlayerTime = 0;
-            int index = GenerateNewIndex();
+            string newWord = GenerateNewWord();
             for (int i = 0; i < ListOfWordsToBeShownToPlayer.Length; i++)
             {
-                while (ListOfWordsToBeShownToPlayer.Contains(allWords[index]))
+                while (ListOfWordsToBeShownToPlayer.Contains(newWord))
                 {
-                    index = GenerateNewIndex();
+                    newWord = GenerateNewWord();
                 }
-                ListOfWordsToBeShownToPlayer[i] = allWords[index];
+                ListOfWordsToBeShownToPlayer[i] = newWord;
             }
 
-            index = GenerateNewIndex();
+            newWord = GenerateNewWord();
             for (int i = 0; i < GameSolution.Length; i++)
             {
-                while (GameSolution.Contains(allWords[index]))
+                while (GameSolution.Contains(newWord))
                 {
-                    index = GenerateNewIndex();
+                    newWord = GenerateNewWord();
                 }
-                GameSolution[i] = allWords[index];
+                GameSolution[i] = newWord;
             }
         }
 
@@ -102,8 +106,12 @@ namespace Memory_Games_Console
         public override void ShowTheResults()
         {
             Console.WriteLine($"Correct answers: {PlayerScore}, time: {(int)(PlayerTime / 60)} min {Math.Round(PlayerTime % 60, 2)} s");
-            Console.WriteLine("Press any key to return to the main menu.");
-            Console.ReadLine();
+            var orderedScores = PlayerScores.listOfAllBestScores.Where(p => p.Game == GameName)
+            .OrderByDescending(p => p.Score).ThenBy(p => p.Time);
+            for (int i = 0; i < orderedScores.Count(); i++)
+            {
+                Console.WriteLine($"{i + 1}. Name: {orderedScores.ElementAt(i).Name}, score: {orderedScores.ElementAt(i).Score}, time: {orderedScores.ElementAt(i).Time}");
+            }
         }
     }
 }

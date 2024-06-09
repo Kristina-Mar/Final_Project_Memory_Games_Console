@@ -4,6 +4,7 @@ namespace Memory_Games_Console
 {
     internal class Program
     {
+        //public PlayerScores[] bestScores = new PlayerScores[15];
         private static void ShowGameSelection()
         {
             Console.Clear();
