@@ -10,9 +10,9 @@ namespace Memory_Games_Console
     internal class Game3_WhichWordWasShownOnlyOnce : BaseClassForAllGames
     {
         public override string GameName { get; set; } = "Game 3";
-        public override string[] ListOfWordsToBeShownToPlayer { get; set; } = new string[31];
+        public override string[] ListOfWordsToShowToPlayer { get; set; } = new string[31];
         public override string[] GameSolution { get; set; } = new string[1];
-        public override string[] PlayersAnswers { get; set; } = new string[1];
+        public override string[] PlayerAnswers { get; set; } = new string[1];
         public override double PlayerTime { get; set; } = 0;
         public override int PlayerScore { get; set; } = 0;
 
@@ -20,10 +20,10 @@ namespace Memory_Games_Console
         {
             SetUpGame();
             DisplayGame();
-            LogPlayersAnswers();
+            LogPlayerAnswers();
             CheckPlayerAnswers();
             PlayerScores.CheckTheScoreAgainstBestScores(GameName, PlayerScore, PlayerTime);
-            ShowResults();
+            ShowPlayerScore();
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
         }
@@ -33,30 +33,30 @@ namespace Memory_Games_Console
             PlayerTime = 0;
             PlayerScore = 0;
             string newWord;
-            for (int i = 0; i < (ListOfWordsToBeShownToPlayer.Length - 1); i += 2)
+            for (int i = 0; i < (ListOfWordsToShowToPlayer.Length - 1); i += 2)
             {
                 newWord = PickAWordFromListOfAllWords();
-                while (ListOfWordsToBeShownToPlayer.Contains(newWord))
+                while (ListOfWordsToShowToPlayer.Contains(newWord))
                 {
                     newWord = PickAWordFromListOfAllWords();
                 }
-                ListOfWordsToBeShownToPlayer[i] = newWord;
-                ListOfWordsToBeShownToPlayer[i+1] = newWord;
+                ListOfWordsToShowToPlayer[i] = newWord;
+                ListOfWordsToShowToPlayer[i+1] = newWord;
             }
             newWord = PickAWordFromListOfAllWords();
-            while (ListOfWordsToBeShownToPlayer.Contains(newWord))
+            while (ListOfWordsToShowToPlayer.Contains(newWord))
             {
                 newWord = PickAWordFromListOfAllWords();
             }
             GameSolution[0] = newWord;
-            ListOfWordsToBeShownToPlayer[^1] = newWord;
+            ListOfWordsToShowToPlayer[^1] = newWord;
             Random randomOrderGenerator = new Random();
-            for (int j = ListOfWordsToBeShownToPlayer.Length - 1; j >= 0; j--)
+            for (int j = ListOfWordsToShowToPlayer.Length - 1; j >= 0; j--)
             {
-                string originalWord = ListOfWordsToBeShownToPlayer[j];
+                string originalWord = ListOfWordsToShowToPlayer[j];
                 int newIndex = randomOrderGenerator.Next(j + 1);
-                ListOfWordsToBeShownToPlayer[j] = ListOfWordsToBeShownToPlayer[newIndex];
-                ListOfWordsToBeShownToPlayer[newIndex] = originalWord;
+                ListOfWordsToShowToPlayer[j] = ListOfWordsToShowToPlayer[newIndex];
+                ListOfWordsToShowToPlayer[newIndex] = originalWord;
             }
         }
         public override void DisplayGame()
@@ -66,32 +66,32 @@ namespace Memory_Games_Console
             Console.WriteLine("Your task will be to correctly identify the one lone word.");
             Console.WriteLine("Press Enter to start.");
             Console.ReadLine();
-            for (int i = 0; i < ListOfWordsToBeShownToPlayer.Count(); i++)
+            for (int i = 0; i < ListOfWordsToShowToPlayer.Count(); i++)
             {
                 Console.Clear();
                 Thread.Sleep(100);
-                Console.Write($"{i + 1}: {ListOfWordsToBeShownToPlayer[i]}");
+                Console.Write($"{i + 1}: {ListOfWordsToShowToPlayer[i]}");
                 Thread.Sleep(2000);
             }
             Console.Clear();
         }
 
-        public override void LogPlayersAnswers()
+        public override void LogPlayerAnswers()
         {
             Console.WriteLine("Which of the words appeared just once in the original list?");
-            Console.WriteLine(string.Join(", ", ListOfWordsToBeShownToPlayer.Distinct().Order()));
+            Console.WriteLine(string.Join(", ", ListOfWordsToShowToPlayer.Distinct().Order()));
             DateTime startTime = DateTime.Now;
-            PlayersAnswers[0] = Console.ReadLine();
+            PlayerAnswers[0] = Console.ReadLine();
             PlayerTime = Math.Round((DateTime.Now - startTime).TotalSeconds, 2);
         }
         public override void CheckPlayerAnswers()
         {
-            if (PlayersAnswers[0] == GameSolution[0])
+            if (PlayerAnswers[0] == GameSolution[0])
             {
                 PlayerScore = 1;
             }
         }
-        public override void ShowResults()
+        public override void ShowPlayerScore()
         {
             if (PlayerScore == 1)
             {

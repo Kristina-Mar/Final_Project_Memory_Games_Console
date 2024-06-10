@@ -10,9 +10,9 @@ namespace Memory_Games_Console
     public class Game1_WordsInCorrectOrder : BaseClassForAllGames
     {
         public override string GameName { get; set; } = "Game 1";
-        public override string[] ListOfWordsToBeShownToPlayer { get; set; } = new string[10];
+        public override string[] ListOfWordsToShowToPlayer { get; set; } = new string[10];
         public override string[] GameSolution { get; set; } = new string[10];
-        public override string[] PlayersAnswers { get; set; } = new string[10];
+        public override string[] PlayerAnswers { get; set; } = new string[10];
         public override int PlayerScore { get; set; } = 0;
         public override double PlayerTime { get; set; } = 0;
 
@@ -20,10 +20,10 @@ namespace Memory_Games_Console
         {
             SetUpGame();
             DisplayGame();
-            LogPlayersAnswers();
+            LogPlayerAnswers();
             CheckPlayerAnswers();
             PlayerScores.CheckTheScoreAgainstBestScores(GameName,PlayerScore, PlayerTime);
-            ShowResults();
+            ShowPlayerScore();
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
         }
@@ -32,16 +32,16 @@ namespace Memory_Games_Console
         {
             PlayerScore = 0;
             PlayerTime = 0;
-            for (int i = 0; i < GameSolution.Length; i++)
+            for (int i = 0; i < ListOfWordsToShowToPlayer.Length; i++)
             {
                 string newWord = PickAWordFromListOfAllWords();
-                while (GameSolution.Contains(newWord))
+                while (ListOfWordsToShowToPlayer.Contains(newWord))
                 {
                     newWord = PickAWordFromListOfAllWords();
                 }
-                GameSolution[i] = newWord;
+                ListOfWordsToShowToPlayer[i] = newWord;
             }
-            ListOfWordsToBeShownToPlayer = GameSolution;
+            GameSolution = ListOfWordsToShowToPlayer;
         }
         public override void DisplayGame()
         {
@@ -49,7 +49,7 @@ namespace Memory_Games_Console
             Console.WriteLine("Game 1: 10 words will flash in the console now. Your task is to remember their correct order.");
             Console.WriteLine("Press Enter to start.");
             Console.ReadLine();
-            foreach (string word in ListOfWordsToBeShownToPlayer)
+            foreach (string word in ListOfWordsToShowToPlayer)
             {
                 Console.Clear();
                 Console.Write(word);
@@ -58,29 +58,29 @@ namespace Memory_Games_Console
             Console.Clear();
         }
 
-        public override void LogPlayersAnswers()
+        public override void LogPlayerAnswers()
         {
             Console.WriteLine("Write the words you have seen in the correct order:");
-            Console.WriteLine(string.Join(", ", ListOfWordsToBeShownToPlayer.Order().ToArray()));
+            Console.WriteLine(string.Join(", ", ListOfWordsToShowToPlayer.Order().ToArray()));
             DateTime startTime = DateTime.Now;
-            for (int i = 0; i < PlayersAnswers.Length; i++)
+            for (int i = 0; i < PlayerAnswers.Length; i++)
             {
                 Console.WriteLine($"{i + 1}: ");
-                PlayersAnswers[i] = Console.ReadLine();
+                PlayerAnswers[i] = Console.ReadLine();
             }
             PlayerTime = (DateTime.Now - startTime).TotalSeconds;
         }
         public override void CheckPlayerAnswers()
         {
-            for (int i = 0; i < PlayersAnswers.Length; i++)
+            for (int i = 0; i < PlayerAnswers.Length; i++)
             {
-                if (GameSolution[i] == PlayersAnswers[i])
+                if (GameSolution[i] == PlayerAnswers[i])
                 {
                     PlayerScore++;
                 }
             }
         }
-        public override void ShowResults()
+        public override void ShowPlayerScore()
         {
             Console.WriteLine($"Correct answers: {PlayerScore}, time: {(int)(PlayerTime / 60)} min {Math.Round(PlayerTime % 60, 2)} s");
             var orderedScores = PlayerScores.listOfAllBestScores.Where(p => p.Game == GameName)

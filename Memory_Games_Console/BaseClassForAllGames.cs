@@ -15,9 +15,9 @@ namespace Memory_Games_Console
         "mirror", "custard", "click", "cumin", "horse"};
 
         public abstract string GameName { get; set; }
-        public abstract string[] ListOfWordsToBeShownToPlayer { get; set; }
+        public abstract string[] ListOfWordsToShowToPlayer { get; set; }
         public abstract string[] GameSolution { get; set; }
-        public abstract string[] PlayersAnswers { get; set; }
+        public abstract string[] PlayerAnswers { get; set; }
         public abstract double PlayerTime { get; set; }
         public abstract int PlayerScore { get; set; }
 
@@ -32,8 +32,8 @@ namespace Memory_Games_Console
         public abstract void PlayGame();
         public abstract void SetUpGame();
         public abstract void DisplayGame();
-        public abstract void LogPlayersAnswers();
+        public abstract void LogPlayerAnswers();
         public abstract void CheckPlayerAnswers();
-        public abstract void ShowResults();
+        public abstract void ShowPlayerScore();
     }
 }

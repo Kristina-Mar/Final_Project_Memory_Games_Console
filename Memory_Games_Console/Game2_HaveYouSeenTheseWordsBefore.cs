@@ -10,9 +10,9 @@ namespace Memory_Games_Console
     internal class Game2_HaveYouSeenTheseWordsBefore : BaseClassForAllGames
     {
         public override string GameName { get; set; } = "Game 2";
-        public override string[] ListOfWordsToBeShownToPlayer { get; set; } = new string[30];
+        public override string[] ListOfWordsToShowToPlayer { get; set; } = new string[30];
         public override string[] GameSolution { get; set; } = new string[10];
-        public override string[] PlayersAnswers { get; set; } = new string[10];
+        public override string[] PlayerAnswers { get; set; } = new string[10];
         public override int PlayerScore { get; set; } = 0;
         public override double PlayerTime { get; set; } = 0;
 
@@ -20,10 +20,10 @@ namespace Memory_Games_Console
         {
             SetUpGame();
             DisplayGame();
-            LogPlayersAnswers();
+            LogPlayerAnswers();
             CheckPlayerAnswers();
             PlayerScores.CheckTheScoreAgainstBestScores(GameName, PlayerScore, PlayerTime);
-            ShowResults();
+            ShowPlayerScore();
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
         }
@@ -33,13 +33,13 @@ namespace Memory_Games_Console
             PlayerScore = 0;
             PlayerTime = 0;
             string newWord = PickAWordFromListOfAllWords();
-            for (int i = 0; i < ListOfWordsToBeShownToPlayer.Length; i++)
+            for (int i = 0; i < ListOfWordsToShowToPlayer.Length; i++)
             {
-                while (ListOfWordsToBeShownToPlayer.Contains(newWord))
+                while (ListOfWordsToShowToPlayer.Contains(newWord))
                 {
                     newWord = PickAWordFromListOfAllWords();
                 }
-                ListOfWordsToBeShownToPlayer[i] = newWord;
+                ListOfWordsToShowToPlayer[i] = newWord;
             }
 
             newWord = PickAWordFromListOfAllWords();
@@ -61,12 +61,12 @@ namespace Memory_Games_Console
             Console.WriteLine("Press Enter to start.");
             Console.ReadLine();
             Console.Clear();
-            Console.WriteLine(string.Join(", ", ListOfWordsToBeShownToPlayer));
+            Console.WriteLine(string.Join(", ", ListOfWordsToShowToPlayer));
             Thread.Sleep(30000);
             Console.Clear();
         }
 
-        public override void LogPlayersAnswers()
+        public override void LogPlayerAnswers()
         {
             Console.WriteLine("Have you seen these words in the list? Type in Y or y for yes and N or n for no.");
             DateTime startTime = DateTime.Now;
@@ -80,8 +80,8 @@ namespace Memory_Games_Console
                     Console.WriteLine("Try again, type in Y or y for yes and N or n for no.");
                     playersGuess = char.ToUpper(Console.ReadKey().KeyChar);
                 }
-                PlayersAnswers[i] = playersGuess.ToString();
-                if (ListOfWordsToBeShownToPlayer.Contains(GameSolution[i]))
+                PlayerAnswers[i] = playersGuess.ToString();
+                if (ListOfWordsToShowToPlayer.Contains(GameSolution[i]))
                 {
                     GameSolution[i] = "Y";
                 }
@@ -95,15 +95,15 @@ namespace Memory_Games_Console
         }
         public override void CheckPlayerAnswers()
         {
-            for (int i = 0; i < PlayersAnswers.Length; i++)
+            for (int i = 0; i < PlayerAnswers.Length; i++)
             {
-                if (PlayersAnswers[i] == GameSolution[i])
+                if (PlayerAnswers[i] == GameSolution[i])
                 {
                     PlayerScore++;
                 }
             }
         }
-        public override void ShowResults()
+        public override void ShowPlayerScore()
         {
             Console.WriteLine($"Correct answers: {PlayerScore}, time: {(int)(PlayerTime / 60)} min {Math.Round(PlayerTime % 60, 2)} s");
             var orderedScores = PlayerScores.listOfAllBestScores.Where(p => p.Game == GameName)
