@@ -64,7 +64,6 @@ namespace Memory_Games_Console
         {
             var orderedScores = PlayerScore.listOfAllBestScores.Where(p => p.Game == gameName)
                 .OrderByDescending(p => p.Score).ThenBy(p => p.Time);
-            Console.Clear();
             Console.WriteLine($"Top 5 scores for {gameName}:");
             for (int i = 0; i < orderedScores.Count(); i++)
             {
