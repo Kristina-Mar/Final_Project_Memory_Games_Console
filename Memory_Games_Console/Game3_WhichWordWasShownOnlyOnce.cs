@@ -21,9 +21,9 @@ namespace Memory_Games_Console
             SetUpGame();
             DisplayGame();
             LogPlayersAnswers();
-            CheckTheResults();
+            CheckPlayerAnswers();
             PlayerScores.CheckTheScoreAgainstBestScores(GameName, PlayerScore, PlayerTime);
-            ShowTheResults();
+            ShowResults();
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
         }
@@ -35,18 +35,18 @@ namespace Memory_Games_Console
             string newWord;
             for (int i = 0; i < (ListOfWordsToBeShownToPlayer.Length - 1); i += 2)
             {
-                newWord = GenerateNewWord();
+                newWord = PickAWordFromListOfAllWords();
                 while (ListOfWordsToBeShownToPlayer.Contains(newWord))
                 {
-                    newWord = GenerateNewWord();
+                    newWord = PickAWordFromListOfAllWords();
                 }
                 ListOfWordsToBeShownToPlayer[i] = newWord;
                 ListOfWordsToBeShownToPlayer[i+1] = newWord;
             }
-            newWord = GenerateNewWord();
+            newWord = PickAWordFromListOfAllWords();
             while (ListOfWordsToBeShownToPlayer.Contains(newWord))
             {
-                newWord = GenerateNewWord();
+                newWord = PickAWordFromListOfAllWords();
             }
             GameSolution[0] = newWord;
             ListOfWordsToBeShownToPlayer[^1] = newWord;
@@ -84,14 +84,14 @@ namespace Memory_Games_Console
             PlayersAnswers[0] = Console.ReadLine();
             PlayerTime = Math.Round((DateTime.Now - startTime).TotalSeconds, 2);
         }
-        public override void CheckTheResults()
+        public override void CheckPlayerAnswers()
         {
             if (PlayersAnswers[0] == GameSolution[0])
             {
                 PlayerScore = 1;
             }
         }
-        public override void ShowTheResults()
+        public override void ShowResults()
         {
             if (PlayerScore == 1)
             {

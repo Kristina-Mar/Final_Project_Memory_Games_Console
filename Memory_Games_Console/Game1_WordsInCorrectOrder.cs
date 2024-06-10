@@ -21,9 +21,9 @@ namespace Memory_Games_Console
             SetUpGame();
             DisplayGame();
             LogPlayersAnswers();
-            CheckTheResults();
+            CheckPlayerAnswers();
             PlayerScores.CheckTheScoreAgainstBestScores(GameName,PlayerScore, PlayerTime);
-            ShowTheResults();
+            ShowResults();
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
         }
@@ -34,10 +34,10 @@ namespace Memory_Games_Console
             PlayerTime = 0;
             for (int i = 0; i < GameSolution.Length; i++)
             {
-                string newWord = GenerateNewWord();
+                string newWord = PickAWordFromListOfAllWords();
                 while (GameSolution.Contains(newWord))
                 {
-                    newWord = GenerateNewWord();
+                    newWord = PickAWordFromListOfAllWords();
                 }
                 GameSolution[i] = newWord;
             }
@@ -70,7 +70,7 @@ namespace Memory_Games_Console
             }
             PlayerTime = (DateTime.Now - startTime).TotalSeconds;
         }
-        public override void CheckTheResults()
+        public override void CheckPlayerAnswers()
         {
             for (int i = 0; i < PlayersAnswers.Length; i++)
             {
@@ -80,7 +80,7 @@ namespace Memory_Games_Console
                 }
             }
         }
-        public override void ShowTheResults()
+        public override void ShowResults()
         {
             Console.WriteLine($"Correct answers: {PlayerScore}, time: {(int)(PlayerTime / 60)} min {Math.Round(PlayerTime % 60, 2)} s");
             var orderedScores = PlayerScores.listOfAllBestScores.Where(p => p.Game == GameName)

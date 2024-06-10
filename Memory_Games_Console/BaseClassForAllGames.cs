@@ -23,7 +23,7 @@ namespace Memory_Games_Console
 
         private Random _randomIndexGenerator = new Random();
 
-        public string GenerateNewWord()
+        public string PickAWordFromListOfAllWords()
         {
             int i = _randomIndexGenerator.Next(allWords.Count());
             return allWords[i];
@@ -33,7 +33,7 @@ namespace Memory_Games_Console
         public abstract void SetUpGame();
         public abstract void DisplayGame();
         public abstract void LogPlayersAnswers();
-        public abstract void CheckTheResults();
-        public abstract void ShowTheResults();
+        public abstract void CheckPlayerAnswers();
+        public abstract void ShowResults();
     }
 }
