@@ -22,8 +22,9 @@ namespace Memory_Games_Console
             DisplayGame();
             LogPlayerAnswers();
             CheckPlayerAnswers();
-            PlayerScores.CheckTheScoreAgainstBestScores(GameName, PlayerScore, PlayerTime);
             ShowPlayerScore();
+            Memory_Games_Console.PlayerScore.CheckTheScoreAgainstBestScores(GameName, PlayerScore, PlayerTime);
+            Memory_Games_Console.PlayerScore.ShowBestScoresForSpecificGame(GameName);
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
         }
@@ -106,12 +107,6 @@ namespace Memory_Games_Console
         public override void ShowPlayerScore()
         {
             Console.WriteLine($"Correct answers: {PlayerScore}, time: {(int)(PlayerTime / 60)} min {Math.Round(PlayerTime % 60, 2)} s");
-            var orderedScores = PlayerScores.listOfAllBestScores.Where(p => p.Game == GameName)
-            .OrderByDescending(p => p.Score).ThenBy(p => p.Time);
-            for (int i = 0; i < orderedScores.Count(); i++)
-            {
-                Console.WriteLine($"{i + 1}. Name: {orderedScores.ElementAt(i).Name}, score: {orderedScores.ElementAt(i).Score}, time: {orderedScores.ElementAt(i).Time}");
-            }
         }
     }
 }
