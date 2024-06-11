@@ -9,12 +9,12 @@ namespace Memory_Games_Console
 {
     internal class Game3_WhichWordWasShownOnlyOnce : BaseClassForAllGames
     {
-        public override string GameName { get; set; } = "Game 3";
-        public override string[] ListOfWordsToShowToPlayer { get; set; } = new string[31];
-        public override string[] GameSolution { get; set; } = new string[1];
-        public override string[] PlayerAnswers { get; set; } = new string[1];
-        public override double PlayerTime { get; set; } = 0;
-        public override int PlayerScore { get; set; } = 0;
+        public override string GameName { get; protected set; } = "Game 3";
+        public override string[] ListOfWordsToShowToPlayer { get; protected set; } = new string[31];
+        public override string[] GameSolution { get; protected set; } = new string[1];
+        public override string[] PlayerAnswers { get; protected set; } = new string[1];
+        public override double PlayerTime { get; protected set; } = 0;
+        public override int PlayerScore { get; protected set; } = 0;
 
         public override void PlayGame()
         {
@@ -29,7 +29,7 @@ namespace Memory_Games_Console
             Console.ReadLine();
         }
 
-        public override void SetUpGame()
+        protected override void SetUpGame()
         {
             PlayerTime = 0;
             PlayerScore = 0;
@@ -60,7 +60,7 @@ namespace Memory_Games_Console
                 ListOfWordsToShowToPlayer[newIndex] = originalWord;
             }
         }
-        public override void DisplayGame()
+        protected override void DisplayGame()
         {
             Console.Clear();
             Console.WriteLine("Game 3: 31 words will be shown in the console one by one. One of them will only be shown once.");
@@ -77,7 +77,7 @@ namespace Memory_Games_Console
             Console.Clear();
         }
 
-        public override void LogPlayerAnswers()
+        protected override void LogPlayerAnswers()
         {
             Console.WriteLine("Which of the words appeared just once in the original list?");
             Console.WriteLine(string.Join(", ", ListOfWordsToShowToPlayer.Distinct().Order()));
@@ -85,14 +85,14 @@ namespace Memory_Games_Console
             PlayerAnswers[0] = Console.ReadLine();
             PlayerTime = Math.Round((DateTime.Now - startTime).TotalSeconds, 2);
         }
-        public override void CheckPlayerAnswers()
+        protected override void CheckPlayerAnswers()
         {
             if (PlayerAnswers[0] == GameSolution[0])
             {
                 PlayerScore = 1;
             }
         }
-        public override void ShowPlayerScore()
+        protected override void ShowPlayerScore()
         {
             if (PlayerScore == 1)
             {

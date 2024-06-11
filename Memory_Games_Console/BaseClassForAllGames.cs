@@ -14,26 +14,26 @@ namespace Memory_Games_Console
         "wisp", "wasp", "waltz", "vote", "vole", "veto", "wind", "wire", "day", "dame", "deny", "close", "master", "meadow",
         "mirror", "custard", "click", "cumin", "horse"};
 
-        public abstract string GameName { get; set; }
-        public abstract string[] ListOfWordsToShowToPlayer { get; set; }
-        public abstract string[] GameSolution { get; set; }
-        public abstract string[] PlayerAnswers { get; set; }
-        public abstract double PlayerTime { get; set; }
-        public abstract int PlayerScore { get; set; }
+        public abstract string GameName { get; protected set; }
+        public abstract string[] ListOfWordsToShowToPlayer { get; protected set; }
+        public abstract string[] GameSolution { get; protected set; }
+        public abstract string[] PlayerAnswers { get; protected set; }
+        public abstract double PlayerTime { get; protected set; }
+        public abstract int PlayerScore { get; protected set; }
 
         private Random _randomIndexGenerator = new Random();
 
-        public string PickAWordFromListOfAllWords()
+        protected string PickAWordFromListOfAllWords()
         {
             int i = _randomIndexGenerator.Next(allWords.Count());
             return allWords[i];
         }
 
         public abstract void PlayGame();
-        public abstract void SetUpGame();
-        public abstract void DisplayGame();
-        public abstract void LogPlayerAnswers();
-        public abstract void CheckPlayerAnswers();
-        public abstract void ShowPlayerScore();
+        protected abstract void SetUpGame();
+        protected abstract void DisplayGame();
+        protected abstract void LogPlayerAnswers();
+        protected abstract void CheckPlayerAnswers();
+        protected abstract void ShowPlayerScore();
     }
 }

@@ -9,12 +9,12 @@ namespace Memory_Games_Console
 {
     internal class Game2_HaveYouSeenTheseWordsBefore : BaseClassForAllGames
     {
-        public override string GameName { get; set; } = "Game 2";
-        public override string[] ListOfWordsToShowToPlayer { get; set; } = new string[30];
-        public override string[] GameSolution { get; set; } = new string[10];
-        public override string[] PlayerAnswers { get; set; } = new string[10];
-        public override int PlayerScore { get; set; } = 0;
-        public override double PlayerTime { get; set; } = 0;
+        public override string GameName { get; protected set; } = "Game 2";
+        public override string[] ListOfWordsToShowToPlayer { get; protected set; } = new string[30];
+        public override string[] GameSolution { get; protected set; } = new string[10];
+        public override string[] PlayerAnswers { get; protected set; } = new string[10];
+        public override int PlayerScore { get; protected set; } = 0;
+        public override double PlayerTime { get; protected set; } = 0;
 
         public override void PlayGame()
         {
@@ -29,7 +29,7 @@ namespace Memory_Games_Console
             Console.ReadLine();
         }
 
-        public override void SetUpGame()
+        protected override void SetUpGame()
         {
             PlayerScore = 0;
             PlayerTime = 0;
@@ -54,7 +54,7 @@ namespace Memory_Games_Console
             }
         }
 
-        public override void DisplayGame()
+        protected override void DisplayGame()
         {
             Console.Clear();
             Console.WriteLine("Game 2: 30 words will be shown in the console. You have 30 seconds to remember them.");
@@ -67,7 +67,7 @@ namespace Memory_Games_Console
             Console.Clear();
         }
 
-        public override void LogPlayerAnswers()
+        protected override void LogPlayerAnswers()
         {
             Console.WriteLine("Have you seen these words in the list? Type in Y or y for yes and N or n for no.");
             DateTime startTime = DateTime.Now;
@@ -94,7 +94,7 @@ namespace Memory_Games_Console
             }
             PlayerTime = (DateTime.Now - startTime).TotalSeconds;
         }
-        public override void CheckPlayerAnswers()
+        protected override void CheckPlayerAnswers()
         {
             for (int i = 0; i < PlayerAnswers.Length; i++)
             {
@@ -104,7 +104,7 @@ namespace Memory_Games_Console
                 }
             }
         }
-        public override void ShowPlayerScore()
+        protected override void ShowPlayerScore()
         {
             Console.WriteLine($"Correct answers: {PlayerScore}, time: {(int)(PlayerTime / 60)} min {Math.Round(PlayerTime % 60, 2)} s");
         }
