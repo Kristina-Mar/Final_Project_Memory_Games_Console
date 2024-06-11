@@ -44,17 +44,24 @@ namespace Memory_Games_Console
             if (!TopScoresOfAllGames.ContainsKey(gameName))
             {
                 TopScoresOfAllGames.Add(gameName, new PlayerScore[5]);
+                newScore.Name = GetPlayerName();
+                TopScoresOfAllGames[gameName][0] = newScore;
+                return;
             }
-            PlayerScore[] gameScores = TopScoresOfAllGames[gameName].OrderByDescending(p => p.Score).ThenBy(p => p.Time).ToArray();
-            for (int i = 0; i < gameScores.Count(); i++)
+            PlayerScore[] gameScores = TopScoresOfAllGames[gameName];
+            if (gameScores.Where(s => s != null).Count() < 5)
             {
-                if (gameScores[i] == null)
+                for (int i = 0; i < gameScores.Count(); i++)
                 {
-                    newScore.Name = GetPlayerName();
-                    gameScores[i] = newScore;
-                    break;
+                    if (gameScores[i] == null)
+                    {
+                        newScore.Name = GetPlayerName();
+                        TopScoresOfAllGames[gameName][i] = newScore;
+                        return;
+                    }
                 }
             }
+            gameScores = TopScoresOfAllGames[gameName].OrderByDescending(p => p.Score).ThenBy(p => p.Time).ToArray();
             if (playerScore > gameScores.Last().Score)
             {
                 newScore.Name = GetPlayerName();
@@ -74,7 +81,7 @@ namespace Memory_Games_Console
                 Console.WriteLine("There are no top scores for this game yet.");
                 return;
             }
-            var orderedScores = TopScoresOfAllGames[gameName].OrderByDescending(p => p.Score).ThenBy(p => p.Time);
+            var orderedScores = TopScoresOfAllGames[gameName].Where(s => s != null).OrderByDescending(p => p.Score).ThenBy(p => p.Time);
             Console.WriteLine($"Top 5 scores for {gameName}:");
             for (int i = 0; i < orderedScores.Count(); i++)
             {
