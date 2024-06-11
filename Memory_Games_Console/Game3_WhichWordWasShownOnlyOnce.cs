@@ -70,7 +70,7 @@ namespace Memory_Games_Console
             Console.WriteLine(string.Join(", ", ListOfWordsToShowToPlayer.Distinct().Order()));
             DateTime startTime = DateTime.Now;
             PlayerAnswers[0] = Console.ReadLine();
-            PlayerTime = Math.Round((DateTime.Now - startTime).TotalSeconds, 2);
+            PlayerTime = (DateTime.Now - startTime).TotalSeconds;
         }
         protected override void CheckPlayerAnswers()
         {
@@ -83,7 +83,7 @@ namespace Memory_Games_Console
         {
             if (PlayerScore == 1)
             {
-                Console.WriteLine($"You're right, congratulations! Your time: {PlayerTime} s");
+                Console.WriteLine($"You're right, congratulations! Your time: {Math.Round(PlayerTime, 2)} s");
             }
             else
             {
