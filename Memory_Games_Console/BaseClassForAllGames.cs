@@ -29,7 +29,18 @@ namespace Memory_Games_Console
             return allWords[i];
         }
 
-        public abstract void PlayGame();
+        public virtual void PlayGame()
+        {
+            SetUpGame();
+            DisplayGame();
+            LogPlayerAnswers();
+            CheckPlayerAnswers();
+            ShowPlayerScore();
+            Memory_Games_Console.PlayerScore.CheckTheScoreAgainstBestScores(GameName, PlayerScore, PlayerTime);
+            Memory_Games_Console.PlayerScore.ShowBestScoresForSpecificGame(GameName);
+            Console.WriteLine("Press any key to return to the main menu.");
+            Console.ReadLine();
+        }
         protected abstract void SetUpGame();
         protected abstract void DisplayGame();
         protected abstract void LogPlayerAnswers();

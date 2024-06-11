@@ -16,19 +16,6 @@ namespace Memory_Games_Console
         public override int PlayerScore { get; protected set; } = 0;
         public override double PlayerTime { get; protected set; } = 0;
 
-        public override void PlayGame()
-        {
-            SetUpGame();
-            DisplayGame();
-            LogPlayerAnswers();
-            CheckPlayerAnswers();
-            ShowPlayerScore();
-            Memory_Games_Console.PlayerScore.CheckTheScoreAgainstBestScores(GameName, PlayerScore, PlayerTime);
-            Memory_Games_Console.PlayerScore.ShowBestScoresForSpecificGame(GameName);
-            Console.WriteLine("Press any key to return to the main menu.");
-            Console.ReadLine();
-        }
-
         protected override void SetUpGame()
         {
             PlayerScore = 0;
