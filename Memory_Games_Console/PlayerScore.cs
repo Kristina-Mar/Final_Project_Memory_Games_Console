@@ -8,7 +8,6 @@ namespace Memory_Games_Console
 {
     public class PlayerScore
     {
-        public string Game { get; private set; }
         public int Score { get; private set; }
         public double Time { get; private set; }
         public string Name { get; private set; }
@@ -16,9 +15,8 @@ namespace Memory_Games_Console
         public static List<PlayerScore> listOfAllBestScores = new List<PlayerScore>();
         public static Dictionary<string , PlayerScore[]> TopScoresOfAllGames {  get; private set; } = new Dictionary<string , PlayerScore[]>();
 
-        public PlayerScore(string game, int score, double time)
+        public PlayerScore(int score, double time)
         {
-            Game = game;
             Score = score;
             Time = time;
         }
@@ -40,7 +38,7 @@ namespace Memory_Games_Console
             {
                 return;
             }
-            PlayerScore newScore = new PlayerScore(gameName, playerScore, playerTime);
+            PlayerScore newScore = new PlayerScore(playerScore, playerTime);
             if (!TopScoresOfAllGames.ContainsKey(gameName))
             {
                 TopScoresOfAllGames.Add(gameName, new PlayerScore[5]);
