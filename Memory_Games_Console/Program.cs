@@ -36,20 +36,14 @@ namespace Memory_Games_Console
                 switch (gameChoice)
                 {
                     case ConsoleKey.NumPad1:
-                        game1.PlayGame();
-                        break;
                     case ConsoleKey.D1:
                         game1.PlayGame();
                         break;
                     case ConsoleKey.NumPad2:
-                        game2.PlayGame();
-                        break;
                     case ConsoleKey.D2:
                         game2.PlayGame();
                         break;
                     case ConsoleKey.NumPad3:
-                        game3.PlayGame();
-                        break;
                     case ConsoleKey.D3:
                         game3.PlayGame();
                         break;
