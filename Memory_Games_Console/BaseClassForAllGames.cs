@@ -36,7 +36,10 @@ namespace Memory_Games_Console
             LogPlayerAnswers();
             CheckPlayerAnswers();
             ShowPlayerScore();
-            Memory_Games_Console.PlayerScore.CheckTheScoreAgainstBestScores(GameName, PlayerScore, PlayerTime);
+            if (PlayerScore > 0)
+            {
+                Memory_Games_Console.PlayerScore.CheckTheScoreAgainstBestScores(GameName, PlayerScore, PlayerTime);
+            }
             Memory_Games_Console.PlayerScore.ShowBestScoresForSpecificGame(GameName);
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();

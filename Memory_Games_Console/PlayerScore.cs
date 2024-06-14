@@ -11,7 +11,7 @@ namespace Memory_Games_Console
         public int Score { get; private set; }
         public double Time { get; private set; }
         public string PlayerName { get; private set; }
-        public static Dictionary<string , PlayerScore[]> TopScoresOfAllGames {  get; private set; } = new Dictionary<string , PlayerScore[]>();
+        public static Dictionary<string , List<PlayerScore>> TopScoresOfAllGames {  get; private set; } = new Dictionary<string , List<PlayerScore>>();
 
         public PlayerScore(int score, double time)
         {
@@ -29,46 +29,42 @@ namespace Memory_Games_Console
             }
             return name;
         }
+        private static void AddNewScoreToTopScores(string gameName, PlayerScore newScore)
+        {
+            newScore.PlayerName = GetPlayerName();
+            TopScoresOfAllGames[gameName].Add(newScore);
+        }
+
+        public static void RemoveLowestScore(string gameName)
+        {
+            TopScoresOfAllGames[gameName] = TopScoresOfAllGames[gameName].OrderByDescending(p => p.Score).ThenBy(p => p.Time).ToList();
+            TopScoresOfAllGames[gameName].RemoveAt(TopScoresOfAllGames[gameName].Count()-1);
+        }
 
         public static void CheckTheScoreAgainstBestScores(string gameName, int playerScore, double playerTime)
         {
-            if (playerScore == 0)
-            {
-                return;
-            }
             PlayerScore newScore = new PlayerScore(playerScore, playerTime);
             if (!TopScoresOfAllGames.ContainsKey(gameName))
             {
-                TopScoresOfAllGames.Add(gameName, new PlayerScore[5]);
-                newScore.PlayerName = GetPlayerName();
-                TopScoresOfAllGames[gameName][0] = newScore;
+                TopScoresOfAllGames.Add(gameName, new List<PlayerScore>());
+                AddNewScoreToTopScores(gameName, newScore);
                 return;
             }
-            PlayerScore[] gameScores = TopScoresOfAllGames[gameName];
-            if (gameScores.Where(s => s != null).Count() < 5)
+            IEnumerable<PlayerScore> gameScores = TopScoresOfAllGames[gameName].OrderByDescending(p => p.Score).ThenBy(p => p.Time);
+            if (gameScores.Count() < 5)
             {
-                for (int i = 0; i < gameScores.Count(); i++)
-                {
-                    if (gameScores[i] == null)
-                    {
-                        newScore.PlayerName = GetPlayerName();
-                        TopScoresOfAllGames[gameName][i] = newScore;
-                        return;
-                    }
-                }
+                AddNewScoreToTopScores(gameName, newScore);
             }
-            gameScores = TopScoresOfAllGames[gameName].OrderByDescending(p => p.Score).ThenBy(p => p.Time).ToArray();
-            if (playerScore > gameScores.Last().Score)
+            else if (playerScore > gameScores.Last().Score)
             {
-                newScore.PlayerName = GetPlayerName();
-                gameScores[^1] = newScore;
+                AddNewScoreToTopScores(gameName, newScore);
+                RemoveLowestScore(gameName);
             }
             else if (playerScore == gameScores.Last().Score && playerTime < gameScores.Last().Time)
             {
-                newScore.PlayerName = GetPlayerName();
-                gameScores[^1] = newScore;
+                AddNewScoreToTopScores(gameName, newScore);
+                RemoveLowestScore(gameName);
             }
-            TopScoresOfAllGames[gameName] = gameScores;
         }
         public static void ShowBestScoresForSpecificGame(string gameName)
         {
@@ -77,8 +73,8 @@ namespace Memory_Games_Console
                 Console.WriteLine("There are no top scores for this game yet.");
                 return;
             }
-            var orderedScores = TopScoresOfAllGames[gameName].Where(s => s != null).OrderByDescending(p => p.Score).ThenBy(p => p.Time);
-            Console.WriteLine($"Top 5 scores for {gameName}:");
+            var orderedScores = TopScoresOfAllGames[gameName].OrderByDescending(p => p.Score).ThenBy(p => p.Time);
+            Console.WriteLine($"Top scores for {gameName}:");
             for (int i = 0; i < orderedScores.Count(); i++)
             {
                 Console.WriteLine($"{i + 1}. Name: {orderedScores.ElementAt(i).PlayerName}, score: {orderedScores.ElementAt(i).Score}, time: {orderedScores.ElementAt(i).Time}");
