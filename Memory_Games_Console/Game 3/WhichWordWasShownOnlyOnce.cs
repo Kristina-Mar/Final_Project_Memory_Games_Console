@@ -9,7 +9,8 @@ namespace Memory_Games_Console
 {
     internal class WhichWordWasShownOnlyOnce : BaseClassForAllGames
     {
-        public new const string GameName = "Game 3";
+        public override string GameName { get; protected set; } = "Game 3";
+        //public new const string GameName = "Game 3";
         public override string[] ListOfWordsToShowToPlayer { get; protected set; } = new string[31];
         public override string[] GameSolution { get; protected set; } = new string[1];
         public override string[] PlayerAnswers { get; protected set; } = new string[1];

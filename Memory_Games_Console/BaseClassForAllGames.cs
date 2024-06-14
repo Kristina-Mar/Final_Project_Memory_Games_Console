@@ -14,7 +14,7 @@ namespace Memory_Games_Console
         "wisp", "wasp", "waltz", "vote", "vole", "veto", "wind", "wire", "day", "dame", "deny", "close", "master", "meadow",
         "mirror", "custard", "click", "cumin", "horse"};
 
-        public const string GameName = "";
+        public abstract string GameName { get; protected set; }
         public abstract string[] ListOfWordsToShowToPlayer { get; protected set; }
         public abstract string[] GameSolution { get; protected set; }
         public abstract string[] PlayerAnswers { get; protected set; }

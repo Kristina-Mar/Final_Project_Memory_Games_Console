@@ -1,20 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Memory_Games_Console
 {
     public class PlayerScore
     {
-        public int Score { get; private set; }
-        public double Time { get; private set; }
-        public string PlayerName { get; private set; }
-        public static Dictionary<string , List<PlayerScore>> TopScoresOfAllGames {  get; private set; } = new Dictionary<string , List<PlayerScore>>();
-
-        public PlayerScore(int score, double time)
+        public string GameName { get; set; }
+        public int Score { get; set; }
+        public double Time { get; set; }
+        public string PlayerName { get; set; }
+        private static List<PlayerScore> _topScores {  get; set; } = new List<PlayerScore>();
+        private static readonly string _scoresFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Memory_Games_Console_data", "TopScores");
+        private static string _topScoresFilePath = string.Empty;
+        private static readonly XmlSerializer serializer = new XmlSerializer(typeof(List<PlayerScore>));
+        public PlayerScore()
         {
+            
+        }
+
+        public PlayerScore(string gameName, int score, double time)
+        {
+            GameName = gameName;
             Score = score;
             Time = time;
         }
@@ -29,51 +41,91 @@ namespace Memory_Games_Console
             }
             return name;
         }
-        private static void AddNewScoreToTopScores(string gameName, PlayerScore newScore)
+        private static void AddNewScoreToTopScores(PlayerScore newScore)
         {
             newScore.PlayerName = GetPlayerName();
-            TopScoresOfAllGames[gameName].Add(newScore);
+            _topScores.Add(newScore);
         }
 
         public static void RemoveLowestScore(string gameName)
         {
-            TopScoresOfAllGames[gameName] = TopScoresOfAllGames[gameName].OrderByDescending(p => p.Score).ThenBy(p => p.Time).ToList();
-            TopScoresOfAllGames[gameName].RemoveAt(TopScoresOfAllGames[gameName].Count()-1);
+            _topScores = _topScores.OrderByDescending(p => p.Score).ThenBy(p => p.Time).ToList();
+            _topScores.RemoveAt(_topScores.Count() - 1);
+        }
+
+        public static List<PlayerScore> LoadBestScoresFromFile(string gameName)
+        { 
+            if (!Directory.Exists(_scoresFolderPath))
+            {
+                Directory.CreateDirectory(_scoresFolderPath);
+            }
+            _topScoresFilePath = Path.Combine(_scoresFolderPath, $"{gameName}_TopScores.txt");
+            if (!File.Exists(_topScoresFilePath))
+            {
+                File.Create(_topScoresFilePath).Close();
+            }
+            if (File.ReadAllText(_topScoresFilePath).Length != 0)
+            {
+                using (StreamReader readerXML = new StreamReader(_topScoresFilePath))
+                {
+                    _topScores = serializer.Deserialize(readerXML) as List<PlayerScore>;
+                }
+            }
+            else
+            {
+                _topScores.Clear();
+            }
+            return _topScores;
+        }
+        public static void SaveBestScoresFromFile(string gameName)
+        {
+            if (!Directory.Exists(_scoresFolderPath))
+            {
+                Directory.CreateDirectory(_scoresFolderPath);
+            }
+            _topScoresFilePath = Path.Combine(_scoresFolderPath, $"{gameName}_TopScores.txt");
+            if (!File.Exists(_topScoresFilePath))
+            {
+                File.Create(_topScoresFilePath).Close();
+            }
+            using (StreamWriter writerXML = new StreamWriter(_topScoresFilePath))
+            {
+                serializer.Serialize(writerXML, _topScores);
+            }
         }
 
         public static void CheckTheScoreAgainstBestScores(string gameName, int playerScore, double playerTime)
         {
-            PlayerScore newScore = new PlayerScore(playerScore, playerTime);
-            if (!TopScoresOfAllGames.ContainsKey(gameName))
-            {
-                TopScoresOfAllGames.Add(gameName, new List<PlayerScore>());
-                AddNewScoreToTopScores(gameName, newScore);
-                return;
-            }
-            IEnumerable<PlayerScore> gameScores = TopScoresOfAllGames[gameName].OrderByDescending(p => p.Score).ThenBy(p => p.Time);
+            PlayerScore newScore = new PlayerScore(gameName, playerScore, playerTime);
+            _topScores = LoadBestScoresFromFile(gameName).OrderByDescending(p => p.Score).ThenBy(p => p.Time).ToList();
+            IEnumerable<PlayerScore> gameScores = _topScores.OrderByDescending(p => p.Score).ThenBy(p => p.Time);
             if (gameScores.Count() < 5)
             {
-                AddNewScoreToTopScores(gameName, newScore);
             }
             else if (playerScore > gameScores.Last().Score)
             {
-                AddNewScoreToTopScores(gameName, newScore);
                 RemoveLowestScore(gameName);
             }
             else if (playerScore == gameScores.Last().Score && playerTime < gameScores.Last().Time)
             {
-                AddNewScoreToTopScores(gameName, newScore);
                 RemoveLowestScore(gameName);
             }
+            else
+            {
+                return;
+            }
+            AddNewScoreToTopScores(newScore);
+            SaveBestScoresFromFile(gameName);
         }
         public static void ShowBestScoresForSpecificGame(string gameName)
         {
-            if (!TopScoresOfAllGames.ContainsKey(gameName))
+            _topScores = LoadBestScoresFromFile(gameName);
+            if (_topScores.Count() == 0)
             {
                 Console.WriteLine("There are no top scores for this game yet.");
                 return;
             }
-            var orderedScores = TopScoresOfAllGames[gameName].OrderByDescending(p => p.Score).ThenBy(p => p.Time);
+            var orderedScores = _topScores.OrderByDescending(p => p.Score).ThenBy(p => p.Time);
             Console.WriteLine($"Top scores for {gameName}:");
             for (int i = 0; i < orderedScores.Count(); i++)
             {
