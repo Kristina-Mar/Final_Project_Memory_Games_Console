@@ -8,7 +8,7 @@ namespace Memory_Games_Console
 {
     public abstract class BaseClassForAllGames
     {
-        public readonly List<string> allWords = new List<string>() { "candle", "cat", "house", "home", "trolley", "mouse",
+        private readonly List<string> allWords = new List<string>() { "candle", "cat", "house", "home", "trolley", "mouse",
         "mousse", "field", "flood", "sun", "book", "chair", "music", "musical", "violet", "violin", "cello", "purple",
         "process", "pride", "private", "rain", "forest", "dive", "divide", "diamond", "whisper", "willow", "cloud",
         "wisp", "wasp", "waltz", "vote", "vole", "veto", "wind", "wire", "day", "dame", "deny", "close", "master", "meadow",
