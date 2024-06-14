@@ -93,7 +93,7 @@ namespace Memory_Games_Console
         }
         protected override void ShowPlayerScore()
         {
-            Console.WriteLine($"Correct answers: {PlayerScore}, time: {(int)(PlayerTime / 60)} min {Math.Round(PlayerTime % 60, 2)} s");
+            Console.WriteLine($"Correct answers: {PlayerScore}, time: {TimeFormatting.FormatTime(PlayerTime)}");
         }
     }
 }

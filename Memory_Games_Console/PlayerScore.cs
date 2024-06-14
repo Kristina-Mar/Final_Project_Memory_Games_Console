@@ -129,7 +129,7 @@ namespace Memory_Games_Console
             Console.WriteLine($"Top scores for {gameName}:");
             for (int i = 0; i < orderedScores.Count(); i++)
             {
-                Console.WriteLine($"{i + 1}. Name: {orderedScores.ElementAt(i).PlayerName}, score: {orderedScores.ElementAt(i).Score}, time: {orderedScores.ElementAt(i).Time}");
+                Console.WriteLine($"{i + 1}. Name: {orderedScores.ElementAt(i).PlayerName}, score: {orderedScores.ElementAt(i).Score}, time: {TimeFormatting.FormatTime(orderedScores.ElementAt(i).Time)}");
             }
         }
     }

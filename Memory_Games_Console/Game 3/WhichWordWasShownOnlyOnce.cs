@@ -84,7 +84,7 @@ namespace Memory_Games_Console
         {
             if (PlayerScore == 1)
             {
-                Console.WriteLine($"You're right, congratulations! Your time: {Math.Round(PlayerTime, 2)} s");
+                Console.WriteLine($"You're right, congratulations! Your time: {TimeFormatting.FormatTime(PlayerTime)}");
             }
             else
             {
