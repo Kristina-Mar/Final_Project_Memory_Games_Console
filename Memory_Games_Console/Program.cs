@@ -25,9 +25,9 @@ namespace Memory_Games_Console
         }
         static void Main(string[] args)
         {
-            Game1_WordsInCorrectOrder game1 = new Game1_WordsInCorrectOrder();
-            Game2_HaveYouSeenTheseWordsBefore game2 = new Game2_HaveYouSeenTheseWordsBefore();
-            Game3_WhichWordWasShownOnlyOnce game3 = new Game3_WhichWordWasShownOnlyOnce();
+            WordsInCorrectOrder game1 = new WordsInCorrectOrder();
+            HaveYouSeenTheseWordsBefore game2 = new HaveYouSeenTheseWordsBefore();
+            WhichWordWasShownOnlyOnce game3 = new WhichWordWasShownOnlyOnce();
 
             while (true)
             {

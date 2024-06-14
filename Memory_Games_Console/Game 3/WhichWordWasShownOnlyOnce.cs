@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Memory_Games_Console
 {
-    internal class Game3_WhichWordWasShownOnlyOnce : BaseClassForAllGames
+    internal class WhichWordWasShownOnlyOnce : BaseClassForAllGames
     {
         public new const string GameName = "Game 3";
         public override string[] ListOfWordsToShowToPlayer { get; protected set; } = new string[31];
