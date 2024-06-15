@@ -31,10 +31,12 @@ namespace Memory_Games_Console
             }
             GameSolution = ListOfWordsToShowToPlayer;
         }
+
         protected override void DisplayGame()
         {
             Console.Clear();
-            Console.WriteLine("Game 1: 10 words will flash in the console now. Your task is to remember their correct order.");
+            Console.WriteLine("Order, order!");
+            Console.WriteLine("10 words will flash in the console now. Your task is to remember their correct order.");
             Console.WriteLine("Press Enter to start.");
             Console.ReadLine();
             foreach (string word in ListOfWordsToShowToPlayer)
@@ -45,6 +47,7 @@ namespace Memory_Games_Console
             }
             Console.Clear();
         }
+
         protected override void LogPlayerAnswers()
         {
             Console.WriteLine("Write the words you have seen in the correct order:");
@@ -57,6 +60,7 @@ namespace Memory_Games_Console
             }
             PlayerTime = (DateTime.Now - startTime).TotalSeconds;
         }
+
         protected override void CheckPlayerAnswers()
         {
             for (int i = 0; i < PlayerAnswers.Length; i++)
@@ -67,6 +71,7 @@ namespace Memory_Games_Console
                 }
             }
         }
+
         protected override void ShowPlayerScore()
         {
             Console.WriteLine($"Correct answers: {PlayerScore}, time: {TimeFormatting.FormatTime(PlayerTime)}");

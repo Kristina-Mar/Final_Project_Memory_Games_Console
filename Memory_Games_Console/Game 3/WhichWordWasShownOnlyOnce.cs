@@ -22,6 +22,7 @@ namespace Memory_Games_Console
             PlayerTime = 0;
             PlayerScore = 0;
             string newWord;
+
             for (int i = 0; i < (ListOfWordsToShowToPlayer.Length - 1); i += 2)
             {
                 newWord = PickAWordFromListOfAllWords();
@@ -32,13 +33,15 @@ namespace Memory_Games_Console
                 ListOfWordsToShowToPlayer[i] = newWord;
                 ListOfWordsToShowToPlayer[i+1] = newWord;
             }
+
             newWord = PickAWordFromListOfAllWords();
             while (ListOfWordsToShowToPlayer.Contains(newWord))
             {
                 newWord = PickAWordFromListOfAllWords();
             }
-            GameSolution[0] = newWord;
             ListOfWordsToShowToPlayer[^1] = newWord;
+            GameSolution[0] = newWord;
+
             Random randomOrderGenerator = new Random();
             for (int j = ListOfWordsToShowToPlayer.Length - 1; j >= 0; j--)
             {
@@ -51,7 +54,8 @@ namespace Memory_Games_Console
         protected override void DisplayGame()
         {
             Console.Clear();
-            Console.WriteLine("Game 3: 31 words will be shown in the console one by one. One of them will only be shown once.");
+            Console.WriteLine("Seeing double?");
+            Console.WriteLine("31 words will be shown in the console one by one. One of them will only be shown once.");
             Console.WriteLine("Your task will be to correctly identify the one lone word.");
             Console.WriteLine("Press Enter to start.");
             Console.ReadLine();
@@ -67,12 +71,13 @@ namespace Memory_Games_Console
 
         protected override void LogPlayerAnswers()
         {
-            Console.WriteLine("Which of the words appeared just once in the original list?");
+            Console.WriteLine("Which of these words appeared just once in the original list?");
             Console.WriteLine(string.Join(", ", ListOfWordsToShowToPlayer.Distinct().Order()));
             DateTime startTime = DateTime.Now;
             PlayerAnswers[0] = Console.ReadLine();
             PlayerTime = (DateTime.Now - startTime).TotalSeconds;
         }
+
         protected override void CheckPlayerAnswers()
         {
             if (PlayerAnswers[0] == GameSolution[0])
@@ -80,6 +85,7 @@ namespace Memory_Games_Console
                 PlayerScore = 1;
             }
         }
+
         protected override void ShowPlayerScore()
         {
             if (PlayerScore == 1)

@@ -44,7 +44,8 @@ namespace Memory_Games_Console
         protected override void DisplayGame()
         {
             Console.Clear();
-            Console.WriteLine("Game 2: 30 words will be shown in the console. You have 30 seconds to remember them.");
+            Console.WriteLine("Find the imposters");
+            Console.WriteLine("30 words will be shown in the console. You have 30 seconds to remember them.");
             Console.WriteLine("After that, 10 words will be shown in the console and you will have to decide whether they were in the original list.");
             Console.WriteLine("Press Enter to start.");
             Console.ReadLine();
@@ -56,7 +57,7 @@ namespace Memory_Games_Console
 
         protected override void LogPlayerAnswers()
         {
-            Console.WriteLine("Have you seen these words in the list? Type in Y or y for yes and N or n for no.");
+            Console.WriteLine("Have you seen these words in the original list? Type in Y or y for yes and N or n for no.");
             DateTime startTime = DateTime.Now;
             for (int i = 0; i < GameSolution.Length; i++)
             {
@@ -81,6 +82,7 @@ namespace Memory_Games_Console
             }
             PlayerTime = (DateTime.Now - startTime).TotalSeconds;
         }
+
         protected override void CheckPlayerAnswers()
         {
             for (int i = 0; i < PlayerAnswers.Length; i++)
@@ -91,6 +93,7 @@ namespace Memory_Games_Console
                 }
             }
         }
+
         protected override void ShowPlayerScore()
         {
             Console.WriteLine($"Correct answers: {PlayerScore}, time: {TimeFormatting.FormatTime(PlayerTime)}");
