@@ -9,7 +9,7 @@ namespace Memory_Games_Console
 {
     public class WordsInCorrectOrder : BaseClassForAllGames
     {
-        public override string GameName { get; protected set; } = "Game 1";
+        protected override string GameName { get; } = "Game 1";
         public override string[] ListOfWordsToShowToPlayer { get; protected set; } = new string[10];
         public override string[] GameSolution { get; protected set; } = new string[10];
         public override string[] PlayerAnswers { get; protected set; } = new string[10];

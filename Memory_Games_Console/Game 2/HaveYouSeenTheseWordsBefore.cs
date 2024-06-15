@@ -9,7 +9,7 @@ namespace Memory_Games_Console
 {
     internal class HaveYouSeenTheseWordsBefore : BaseClassForAllGames
     {
-        public override string GameName { get; protected set; } = "Game 2";
+        protected override string GameName { get; } = "Game 2";
         public override string[] ListOfWordsToShowToPlayer { get; protected set; } = new string[30];
         public override string[] GameSolution { get; protected set; } = new string[10];
         public override string[] PlayerAnswers { get; protected set; } = new string[10];
