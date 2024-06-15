@@ -30,6 +30,7 @@ namespace Memory_Games_Console
             Score = score;
             Time = time;
         }
+
         private static string GetPlayerName()
         {
             Console.WriteLine("Congratulations! You've made it onto the list of best players! Please enter your name.");
@@ -41,6 +42,7 @@ namespace Memory_Games_Console
             }
             return name;
         }
+
         private static void AddNewScoreToTopScores(PlayerScore newScore)
         {
             newScore.PlayerName = GetPlayerName();
@@ -54,9 +56,8 @@ namespace Memory_Games_Console
             _topScores.RemoveAt(_topScores.Count() - 1);
         }
 
-
-        private static List<PlayerScore> LoadBestScoresFromFile(string gameName)
-        { 
+        private static void SetValidTopScoreFilePath(string gameName)
+        {
             if (!Directory.Exists(_scoresFolderPath))
             {
                 Directory.CreateDirectory(_scoresFolderPath);
@@ -66,6 +67,11 @@ namespace Memory_Games_Console
             {
                 File.Create(_topScoresFilePath).Close();
             }
+        }
+
+        private static List<PlayerScore> LoadBestScoresFromFile(string gameName)
+        { 
+            SetValidTopScoreFilePath(gameName);
             if (File.ReadAllText(_topScoresFilePath).Length != 0)
             {
                 using (StreamReader readerXML = new StreamReader(_topScoresFilePath))
@@ -75,17 +81,14 @@ namespace Memory_Games_Console
             }
             else
             {
-                _topScores.Clear();
+                _topScores.Clear(); // So that the program doesn't use top scores from another game.
             }
             return _topScores;
         }
-        private static void SaveBestScoresFromFile(string gameName)
+
+        private static void SaveBestScoresToFile(string gameName)
         {
-            if (!Directory.Exists(_scoresFolderPath))
-            {
-                Directory.CreateDirectory(_scoresFolderPath);
-            }
-            _topScoresFilePath = Path.Combine(_scoresFolderPath, $"{gameName}_TopScores.txt");
+            SetValidTopScoreFilePath(gameName);
             if (!File.Exists(_topScoresFilePath))
             {
                 File.Create(_topScoresFilePath).Close();
@@ -117,9 +120,10 @@ namespace Memory_Games_Console
                 return;
             }
             AddNewScoreToTopScores(newScore);
-            SaveBestScoresFromFile(gameName);
+            SaveBestScoresToFile(gameName);
         }
-        public static void ShowBestScoresForSpecificGame(string gameName)
+
+        public static void ShowBestScoresForThisGame(string gameName)
         {
             _topScores = LoadBestScoresFromFile(gameName);
             if (_topScores.Count() == 0)

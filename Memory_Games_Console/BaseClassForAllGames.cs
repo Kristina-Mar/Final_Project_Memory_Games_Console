@@ -40,7 +40,7 @@ namespace Memory_Games_Console
             {
                 Memory_Games_Console.PlayerScore.CheckTheScoreAgainstBestScores(GameName, PlayerScore, PlayerTime);
             }
-            Memory_Games_Console.PlayerScore.ShowBestScoresForSpecificGame(GameName);
+            Memory_Games_Console.PlayerScore.ShowBestScoresForThisGame(GameName);
             Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadLine();
         }
