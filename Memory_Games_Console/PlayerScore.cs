@@ -1,24 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.Serialization;
 using System.Text;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Memory_Games_Console
 {
+    [DataContract]
     public class PlayerScore
     {
-        public string GameName { get; set; }
-        public int Score { get; set; }
-        public double Time { get; set; }
-        public string PlayerName { get; set; }
+        [DataMember]
+        public string GameName { get; private set; }
+        [DataMember]
+        public int Score { get; private set; }
+        [DataMember]
+        public double Time { get; private set; }
+        [DataMember]
+        public string PlayerName { get; private set; }
+        [DataMember]
         private static List<PlayerScore> _topScores {  get; set; } = new List<PlayerScore>();
         private static readonly string _scoresFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Memory_Games_Console_data", "TopScores");
         private static string _topScoresFilePath = string.Empty;
-        private static readonly XmlSerializer serializer = new XmlSerializer(typeof(List<PlayerScore>));
+        private static readonly DataContractSerializer serializer = new DataContractSerializer(typeof(List<PlayerScore>));
         public PlayerScore()
         {
             
@@ -74,9 +84,12 @@ namespace Memory_Games_Console
             SetValidTopScoreFilePath(gameName);
             if (File.ReadAllText(_topScoresFilePath).Length != 0)
             {
-                using (StreamReader readerXML = new StreamReader(_topScoresFilePath))
+                using (FileStream fileStream = new FileStream(_topScoresFilePath, FileMode.Open))
                 {
-                    _topScores = serializer.Deserialize(readerXML) as List<PlayerScore>;
+                    using (XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fileStream, new XmlDictionaryReaderQuotas()))
+                    {
+                        _topScores = (List<PlayerScore>)serializer.ReadObject(reader, true);
+                    }
                 }
             }
             else
@@ -93,9 +106,14 @@ namespace Memory_Games_Console
             {
                 File.Create(_topScoresFilePath).Close();
             }
-            using (StreamWriter writerXML = new StreamWriter(_topScoresFilePath))
+            XmlWriterSettings settings = new XmlWriterSettings()
             {
-                serializer.Serialize(writerXML, _topScores);
+                Indent = true,
+                IndentChars = "\t",
+            };
+            using (XmlWriter writer = XmlWriter.Create(_topScoresFilePath, settings))
+            {
+                serializer.WriteObject(writer, _topScores);
             }
         }
 

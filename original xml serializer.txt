@@ -1,0 +1,46 @@
+private static readonly XmlSerializer serializer = new XmlSerializer(typeof(List<PlayerScore>));
+
+        private static List<PlayerScore> LoadBestScoresFromFile(string gameName)
+        { 
+            SetValidTopScoreFilePath(gameName);
+            if (File.ReadAllText(_topScoresFilePath).Length != 0)
+            {
+                /*using (StreamReader readerXML = new StreamReader(_topScoresFilePath))
+                {
+                    _topScores = serializer.Deserialize(readerXML) as List<PlayerScore>;
+                }*/
+
+                var fileStream = new FileStream(_topScoresFilePath, FileMode.Open);
+                var reader = XmlDictionaryReader.CreateTextReader(fileStream, new XmlDictionaryReaderQuotas());
+                _topScores = (List<PlayerScore>)serializer2.ReadObject(reader, true);
+                reader.Close();
+                fileStream.Close();
+            }
+            else
+            {
+                _topScores.Clear(); // So that the program doesn't use top scores from another game.
+            }
+            return _topScores;
+        }
+
+        private static void SaveBestScoresToFile(string gameName)
+        {
+            SetValidTopScoreFilePath(gameName);
+            if (!File.Exists(_topScoresFilePath))
+            {
+                File.Create(_topScoresFilePath).Close();
+            }
+            /*using (StreamWriter writerXML = new StreamWriter(_topScoresFilePath))
+            {
+                serializer.Serialize(writerXML, _topScores);
+            }*/
+
+            var settings = new XmlWriterSettings()
+            {
+                Indent = true,
+                IndentChars = "\t",
+            };
+            var writer = XmlWriter.Create(_topScoresFilePath, settings);
+            serializer2.WriteObject(writer, _topScores);
+            writer.Close();
+        }

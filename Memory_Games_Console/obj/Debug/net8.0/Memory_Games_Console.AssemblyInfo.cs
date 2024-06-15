@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Memory_Games_Console")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a287ea9c90f91dd82446f1700ee988b6766444aa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec9a161b5fc33021adda105b273414337b371b45")]
 [assembly: System.Reflection.AssemblyProductAttribute("Memory_Games_Console")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Memory_Games_Console")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
