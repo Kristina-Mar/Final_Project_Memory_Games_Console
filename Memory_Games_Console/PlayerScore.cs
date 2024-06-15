@@ -24,7 +24,7 @@ namespace Memory_Games_Console
             
         }
 
-        public PlayerScore(string gameName, int score, double time)
+        private PlayerScore(string gameName, int score, double time)
         {
             GameName = gameName;
             Score = score;
@@ -48,12 +48,14 @@ namespace Memory_Games_Console
         }
 
         public static void RemoveLowestScore(string gameName)
+            // Only top 5 scores are saved.
         {
             _topScores = _topScores.OrderByDescending(p => p.Score).ThenBy(p => p.Time).ToList();
             _topScores.RemoveAt(_topScores.Count() - 1);
         }
 
-        public static List<PlayerScore> LoadBestScoresFromFile(string gameName)
+
+        private static List<PlayerScore> LoadBestScoresFromFile(string gameName)
         { 
             if (!Directory.Exists(_scoresFolderPath))
             {
@@ -77,7 +79,7 @@ namespace Memory_Games_Console
             }
             return _topScores;
         }
-        public static void SaveBestScoresFromFile(string gameName)
+        private static void SaveBestScoresFromFile(string gameName)
         {
             if (!Directory.Exists(_scoresFolderPath))
             {
