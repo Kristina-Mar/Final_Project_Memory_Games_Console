@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Memory_Games_Console
 {
-    public class WordsInCorrectOrder : BaseClassForAllGames
+    internal class WordsInCorrectOrder : BaseClassForAllGames
     {
         protected override string GameName { get; } = "Game 1";
         public override string[] ListOfWordsToShowToPlayer { get; protected set; } = new string[10];
