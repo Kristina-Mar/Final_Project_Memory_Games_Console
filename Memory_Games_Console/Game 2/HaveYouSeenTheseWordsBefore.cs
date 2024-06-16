@@ -13,12 +13,12 @@ namespace Memory_Games_Console
         public override string[] ListOfWordsToShowToPlayer { get; protected set; } = new string[30];
         public override string[] GameSolution { get; protected set; } = new string[10];
         public override string[] PlayerAnswers { get; protected set; } = new string[10];
-        public override int PlayerScore { get; protected set; } = 0;
+        public override int PlayerCorrectAnswers { get; protected set; } = 0;
         public override double PlayerTime { get; protected set; } = 0;
 
         protected override void SetUpGame()
         {
-            PlayerScore = 0;
+            PlayerCorrectAnswers = 0;
             PlayerTime = 0;
             string newWord = PickAWordFromListOfAllWords();
             for (int i = 0; i < ListOfWordsToShowToPlayer.Length; i++)
@@ -89,14 +89,14 @@ namespace Memory_Games_Console
             {
                 if (PlayerAnswers[i] == GameSolution[i])
                 {
-                    PlayerScore++;
+                    PlayerCorrectAnswers++;
                 }
             }
         }
 
         protected override void ShowPlayerScore()
         {
-            Console.WriteLine($"Correct answers: {PlayerScore}, time: {TimeFormatting.FormatTime(PlayerTime)}");
+            Console.WriteLine($"Correct answers: {PlayerCorrectAnswers}, time: {TimeFormatting.FormatTime(PlayerTime)}");
         }
     }
 }

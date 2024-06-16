@@ -19,7 +19,7 @@ namespace Memory_Games_Console
         public abstract string[] GameSolution { get; protected set; }
         public abstract string[] PlayerAnswers { get; protected set; }
         public abstract double PlayerTime { get; protected set; }
-        public abstract int PlayerScore { get; protected set; }
+        public abstract int PlayerCorrectAnswers { get; protected set; }
 
         private Random _randomIndexGenerator = new Random();
 
@@ -36,9 +36,10 @@ namespace Memory_Games_Console
             LogPlayerAnswers();
             CheckPlayerAnswers();
             ShowPlayerScore();
-            if (PlayerScore > 0)
+            if (PlayerCorrectAnswers > 0)
             {
-                Memory_Games_Console.PlayerScore.CheckTheScoreAgainstBestScores(GameName, PlayerScore, PlayerTime);
+                PlayerScore playerScore = new PlayerScore(GameName, PlayerCorrectAnswers, PlayerTime);
+                playerScore.CheckTheScoreAgainstBestScores();
             }
             Memory_Games_Console.PlayerScore.ShowBestScoresForThisGame(GameName);
             Console.WriteLine("Press any key to return to the main menu.");
